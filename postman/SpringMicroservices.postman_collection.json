@@ -1,0 +1,290 @@
+{
+	"info": {
+		"_postman_id": "ef0f0cc6-5a6a-4490-8922-62c3bba95552",
+		"name": "SpringMicroservices",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get cards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "48a8b643-75d9-48ca-9a3c-9a60c2db42cf",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"environment to be production\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData[0].title).to.eql(\"Stored Title\");",
+							"});",
+							"",
+							"postman.setNextRequest(\"Create new card\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{cards_host}}/cards",
+					"host": [
+						"{{cards_host}}"
+					],
+					"path": [
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create new card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a069b089-ac91-48c2-9019-601393c0fb9c",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"postman.setNextRequest(\"Get specific card\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Created card title\",\n\t\"description\": \"Created card description\",\n\t\"participants\": \"Created card participants\"\n}"
+				},
+				"url": {
+					"raw": "{{cards_host}}/cards",
+					"host": [
+						"{{cards_host}}"
+					],
+					"path": [
+						"cards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9f7cdf4b-f02b-441f-aadc-b7e41ac16ef7",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"returned object title to be the created card title\", function () {",
+							"    var jsonData = pm.response.json();",
+							"    pm.expect(jsonData.title).to.eql(\"Created card title\");",
+							"});",
+							"",
+							"postman.setNextRequest(\"Delete card\")"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{cards_host}}/cards/1",
+					"host": [
+						"{{cards_host}}"
+					],
+					"path": [
+						"cards",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "107f98df-1e34-453c-9403-e98259ea1717",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{cards_host}}/cards/1",
+					"host": [
+						"{{cards_host}}"
+					],
+					"path": [
+						"cards",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Boards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "48a8b643-75d9-48ca-9a3c-9a60c2db42cf",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{boards_host}}/boards",
+					"host": [
+						"{{boards_host}}"
+					],
+					"path": [
+						"boards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get specific board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "48a8b643-75d9-48ca-9a3c-9a60c2db42cf",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{boards_host}}/boards/10001",
+					"host": [
+						"{{boards_host}}"
+					],
+					"path": [
+						"boards",
+						"10001"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get label groups from board",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "48a8b643-75d9-48ca-9a3c-9a60c2db42cf",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{boards_host}}/boards/10001/labels",
+					"host": [
+						"{{boards_host}}"
+					],
+					"path": [
+						"boards",
+						"10001",
+						"labels"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get cards from label group",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "48a8b643-75d9-48ca-9a3c-9a60c2db42cf",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{boards_host}}/labels/1001",
+					"host": [
+						"{{boards_host}}"
+					],
+					"path": [
+						"labels",
+						"1001"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

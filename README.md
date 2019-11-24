@@ -16,4 +16,6 @@ The idea is to add as many Spring Cloud components as possible.
 * Eureka, to allow for service discovery
 * Sleuth and Zipkin Client, to enable distributed tracing with to a Zipkin server
 
+## Testing/Development Tools
 
+For testing and usage, please refer to the postman collection in the postman folder.
